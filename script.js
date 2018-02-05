@@ -1,3 +1,5 @@
+var baseurl = "192.168.43.190:8000";
+
 function hamClose(){
 	document.getElementsByClassName("hamburger")[0].style.left = "-110vw";
 }
@@ -186,7 +188,7 @@ var colleges;
 $.ajax({
 	type:'GET',
 	// url:'https://bits-apogee.org/2018/hackathon/problemstatements/',
-	url:'http://192.168.43.14:8000/api/colleges/',
+	url:'http://'+baseurl+'/api/colleges/',
 	complete:function(xhr,textstatus){
 		colleges = xhr.responseJSON.colleges;
 
@@ -554,23 +556,31 @@ function submitData(){
 	var collegeSelected = document.getElementById("college").value;
 	var vidURL = document.getElementById("vid_url").value;
 
-	if(document.getElementById('name').value==0)
-		alert('Please enter the name!');
+	if(document.getElementById('name').value==0){
+		document.getElementById("register-message").style.display = "block";
+		document.getElementById("register-message").innerHTML = 'Please enter the name!';
+		}
 	else if(!validatePhone(document.getElementById('phone').value))
 	{
-		alert("Enter valid phone number!");
+		document.getElementById("register-message").style.display = "block";
+		document.getElementById("register-message").innerHTML = "Enter valid phone number!";
 	}
 	else if(!validateEmail(document.getElementById('mail').value))
 	{
-		alert("Enter valid email address!");
+		document.getElementById("register-message").style.display = "block";
+		document.getElementById("register-message").innerHTML = "Enter valid email address!";
 	}
 	// else if(problemSelected == 0){
 	// 	alert("Select Problem Statement");	
 	// } 
-	else if(collegeSelected == 0)
-		alert("Please sellect college!");
-	else if(!isFileUploaded && vidURL==0) 
-		alert("Please upload/enter a solution (file or video url)");
+	else if(collegeSelected == 0){
+		document.getElementById("register-message").style.display = "block";
+		document.getElementById("register-message").innerHTML = "Please sellect college!";
+	}
+	else if(!isFileUploaded && vidURL==0) {
+		document.getElementById("register-message").style.display = "block";
+		document.getElementById("register-message").innerHTML = "Please upload/enter a solution (file or video url)";
+	}
 	else
 	{
 		// disable submit button
@@ -588,7 +598,7 @@ function submitData(){
 					$.ajax({
 						type:'POST',
 						// url:"https://bits-apogee.org/2018/aic/register_team_non_bitsian/",
-						url:"http://192.168.43.14:8000/hackathon/register_hackathon/",
+						url:"http://192.168.43.190:8000/hackathon/register_hackathon/",
 						data:{
 							name: name,
 							phone: phone,
@@ -596,10 +606,12 @@ function submitData(){
 							college_id: collegeSelected,
 							video_url: vidURL,
 							// problem_id: problemSelected,
-							pdf:pdf
+							pdf:pdf,
+							filename:document.getElementById("solution").files[0].name
 						},
 						complete:function(xhr,textstatus){
-							console.log(xhr);
+							document.getElementById("register-message").style.display = "block";
+							document.getElementById("register-message").innerHTML = xhr.responseJSON.message;
 						},
 						error:function(xhr,textstatus,err){
 							console.log(err);
@@ -609,17 +621,18 @@ function submitData(){
 						submitBtn.disabled=false;
 						submitBtn.style.opacity=1;
 						submitBtn.style.cursor="pointer";
-						alert(response.message);
+
+						document.getElementById("register-message").style.display = "block";
+						document.getElementById("register-message").innerHTML = response.message;
 					});
 				} 
 			reader.readAsDataURL(document.getElementById("solution").files[0]);
 		}
-		else
-		{
+		else{
 			$.ajax({
 				type:'POST',
 				// url:"https://bits-apogee.org/2018/aic/register_team_non_bitsian/",
-				url:"http://192.168.43.14:8000/hackathon/register_hackathon/",
+				url:"http://192.168.43.190:8000/hackathon/register_hackathon/",
 				data:{
 					name: name,
 					phone: phone,
@@ -630,7 +643,8 @@ function submitData(){
 					//pdf:pdf
 				},
 				complete:function(xhr,textstatus){
-					console.log(xhr);
+					document.getElementById("register-message").style.display = "block";
+					document.getElementById("register-message").innerHTML = xhr.responseJSON.message;
 				},
 				error:function(xhr,textstatus,err){
 					console.log(err);
@@ -640,7 +654,9 @@ function submitData(){
 				submitBtn.disabled=false;
 				submitBtn.style.opacity=1;
 				submitBtn.style.cursor="pointer";
-				alert(response.message);
+
+				document.getElementById("register-message").style.display = "block";
+				document.getElementById("register-message").innerHTML = response.message;
 			});
 		}
 	}

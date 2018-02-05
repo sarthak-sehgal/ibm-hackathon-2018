@@ -366,6 +366,21 @@ input[type=submit] {
     cursor: pointer;
 }
 
+#register-message{
+	/*border:solid 2px #5950c7;*/
+	position:relative;
+	width: 92vw;
+	left: 2vw;
+	text-align: center;
+	font-family:sans-serif;
+	font-size:2.5vh;
+	color:#fff;
+	background: rgba(255, 102, 255, .5);
+	padding:2vw;
+	border-radius: 5px;
+	font-size: 3vh;
+	display:none;
+}
 
 @media all and (min-width:800px){
 	
