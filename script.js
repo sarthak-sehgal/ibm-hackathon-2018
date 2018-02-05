@@ -188,7 +188,7 @@ var colleges;
 $.ajax({
 	type:'GET',
 	// url:'https://bits-apogee.org/2018/hackathon/problemstatements/',
-	url:'http://'+baseurl+'/api/colleges/',
+	url:'http://bits-apogee.org/2018/api/colleges/',
 	complete:function(xhr,textstatus){
 		colleges = xhr.responseJSON.colleges;
 
