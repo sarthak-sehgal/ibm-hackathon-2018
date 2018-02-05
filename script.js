@@ -598,7 +598,7 @@ function submitData(){
 					$.ajax({
 						type:'POST',
 						// url:"https://bits-apogee.org/2018/aic/register_team_non_bitsian/",
-						url:"http://192.168.43.190:8000/hackathon/register_hackathon/",
+						url:"https://bits-apogee.org/2018/hackathon/register_hackathon/",
 						data:{
 							name: name,
 							phone: phone,
@@ -632,7 +632,7 @@ function submitData(){
 			$.ajax({
 				type:'POST',
 				// url:"https://bits-apogee.org/2018/aic/register_team_non_bitsian/",
-				url:"http://192.168.43.190:8000/hackathon/register_hackathon/",
+				url:"https://bits-apogee.org/2018/hackathon/register_hackathon/",
 				data:{
 					name: name,
 					phone: phone,
