@@ -1,4 +1,4 @@
-var baseurl = "192.168.43.190:8000";
+var baseurl = "bits-apogee.org/2018";
 
 function hamClose(){
 	document.getElementsByClassName("hamburger")[0].style.left = "-110vw";
